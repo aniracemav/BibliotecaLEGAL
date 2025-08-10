@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Generador de Contratos (MVP)</title>
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">Generador de Contratos · MVP</div>
+      <div><a class="button secondary" href="index.html">Catálogo</a></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Selecciona la plantilla</div>
+      <select id="templateSelect"></select>
+    </div>
+
+    <div class="card" id="formCard">
+      <div class="section-title">Variables</div>
+      <form id="varForm"></form>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Vista previa</div>
+      <div id="preview" class="highlight small" style="min-height:120px">Llena el formulario para ver el resultado…</div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button id="downloadDoc" class="button" disabled>Descargar .doc</button>
+        <button id="copyText" class="button secondary" disabled>Copiar texto</button>
+      </div>
+      <div class="small" style="margin-top:8px">
+        * Descarga .doc basada en HTML (compatible con Microsoft Word).<br/>
+        * Este MVP no incluye firma electrónica ni bloqueo de edición.
+      </div>
+    </div>
+
+    <div class="footer">
+      <hr/>
+      <div>© 2025 · MVP 100% estático</div>
+    </div>
+  </div>
+
+  <script>
+    let templatesIndex = [];
+    let currentTpl = null;
+    let currentVars = {};
+
+    const $sel = document.getElementById('templateSelect');
+    const $form = document.getElementById('varForm');
+    const $preview = document.getElementById('preview');
+    const $btnDoc = document.getElementById('downloadDoc');
+    const $btnCopy = document.getElementById('copyText');
+
+    function option(t) { return `<option value="${t.id}">${t.name} · ${t.jurisdiction}</option>`; }
+
+    function fieldHTML(v){
+      const base = `<label for="${v.key}">${v.label}</label>`;
+      if (v.type === 'textarea') return base + `<textarea id="${v.key}" name="${v.key}" rows="4" class="input"></textarea>`;
+      if (v.type === 'number') return base + `<input type="number" id="${v.key}" name="${v.key}" class="input"/>`;
+      if (v.type === 'date') return base + `<input type="date" id="${v.key}" name="${v.key}" class="input"/>`;
+      return base + `<input type="text" id="${v.key}" name="${v.key}" class="input"/>`;
+    }
+
+    function buildForm(tpl){
+      $form.innerHTML = (tpl.variables||[]).map(fieldHTML).join('<div style="height:10px"></div>');
+      $form.insertAdjacentHTML('beforeend', `<div style="margin-top:12px"><button class="button" id="renderBtn">Renderizar</button></div>`);
+      $form.addEventListener('submit', onSubmit);
+    }
+
+    function onSubmit(e){
+      e.preventDefault();
+      currentVars = {};
+      (currentTpl.variables || []).forEach(v => {
+        const el = document.getElementById(v.key);
+        currentVars[v.key] = (el && el.value) || '';
+      });
+      renderPreview();
+    }
+
+    function textToHtml(text){
+      const esc = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      return esc.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br/>');
+    }
+
+    function renderPreview(){
+      if (!currentTpl) return;
+      fetch(currentTpl.path)
+        .then(r => r.text())
+        .then(raw => {
+          const filled = Mustache.render(raw, currentVars);
+          $preview.innerHTML = '<p>'+ textToHtml(filled) + '</p>';
+          $btnDoc.disabled = false;
+          $btnCopy.disabled = false;
+          $btnDoc.onclick = () => downloadDoc(filled, currentTpl.name);
+          $btnCopy.onclick = () => navigator.clipboard.writeText(filled);
+        });
+    }
+
+    function downloadDoc(text, name){
+      const content = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre>${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre></body></html>`;
+      const blob = new Blob([content], {type: 'application/msword'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = (name || 'contrato') + '.doc';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    }
+
+    function selectByHash(){
+      const hash = decodeURIComponent(location.hash||'').replace('#','');
+      const idx = templatesIndex.findIndex(x => x.id === hash);
+      if (idx >= 0) $sel.selectedIndex = idx;
+      onTemplateChange();
+    }
+
+    function onTemplateChange(){
+      const id = $sel.value;
+      currentTpl = templatesIndex.find(x => x.id === id);
+      buildForm(currentTpl);
+      $preview.innerHTML = 'Llena el formulario para ver el resultado…';
+      $btnDoc.disabled = true;
+      $btnCopy.disabled = true;
+    }
+
+    fetch('data/templates.json')
+      .then(r => r.json())
+      .then(json => {
+        templatesIndex = json.templates || [];
+        $sel.innerHTML = templatesIndex.map(option).join('');
+        $sel.addEventListener('change', onTemplateChange);
+        selectByHash();
+      });
+  </script>
+</body>
+</html>
