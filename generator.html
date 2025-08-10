@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Generador de Contratos · BibliotecaLEGAL</title>
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">BibliotecaLEGAL</div>
+      <div class="nav">
+        <a href="index.html">Inicio</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Selecciona la plantilla</div>
+      <select id="templateSelect" class="input"></select>
+    </div>
+
+    <div class="card" id="formCard">
+      <div class="section-title">Variables</div>
+      <form id="varForm"></form>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Vista previa</div>
+      <div id="preview" class="note" style="min-height:120px;border:1px dashed #e5e7eb;border-radius:12px;padding:12px">Llena el formulario para ver el resultado…</div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button id="downloadDoc" class="button" disabled>Descargar .doc</button>
+        <button id="copyText" class="button secondary" disabled>Copiar texto</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let templatesIndex = [];
+    let currentTpl = null;
+    let currentVars = {};
+
+    const $sel = document.getElementById('templateSelect');
+    const $form = document.getElementById('varForm');
+    const $preview = document.getElementById('preview');
+    const $btnDoc = document.getElementById('downloadDoc');
+    const $btnCopy = document.getElementById('copyText');
+
+    function option(t){ return `<option value="${t.id}">${t.name} · ${t.jurisdiction}</option>`; }
+
+    function fieldHTML(v){
+      const base = `<label style="display:block;font-size:12px;color:#475569;margin:6px 0 4px">${v.label}</label>`;
+      if (v.type === 'textarea') return base + `<textarea id="${v.key}" name="${v.key}" rows="4" class="input" style="width:100%"></textarea>`;
+      if (v.type === 'number') return base + `<input type="number" id="${v.key}" name="${v.key}" class="input" style="width:100%"/>`;
+      if (v.type === 'date') return base + `<input type="date" id="${v.key}" name="${v.key}" class="input" style="width:100%"/>`;
+      return base + `<input type="text" id="${v.key}" name="${v.key}" class="input" style="width:100%"/>`;
+    }
+
+    function buildForm(tpl){
+      $form.innerHTML = (tpl.variables||[]).map(fieldHTML).join('<div style="height:8px"></div>') + `<div style="margin-top:12px"><button class="button" id="renderBtn">Renderizar</button></div>`;
+      $form.addEventListener('submit', onSubmit);
+    }
+
+    function onSubmit(e){
+      e.preventDefault();
+      currentVars = {};
+      (currentTpl.variables || []).forEach(v => {
+        const el = document.getElementById(v.key);
+        currentVars[v.key] = (el && el.value) || '';
+      });
+      renderPreview();
+    }
+
+    function textToHtml(text){
+      const esc = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      return esc.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br/>');
+    }
+
+    function renderPreview(){
+      if (!currentTpl) return;
+      fetch(currentTpl.path)
+        .then(r => r.text())
+        .then(raw => {
+          const filled = Mustache.render(raw, currentVars);
+          $preview.innerHTML = '<p>'+ textToHtml(filled) + '</p>';
+          $btnDoc.disabled = false;
+          $btnCopy.disabled = false;
+          $btnDoc.onclick = () => downloadDoc(filled, currentTpl.name);
+          $btnCopy.onclick = () => navigator.clipboard.writeText(filled);
+        });
+    }
+
+    function downloadDoc(text, name){
+      const content = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre>${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre></body></html>`;
+      const blob = new Blob([content], {type:'application/msword'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = (name||'contrato') + '.doc';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    }
+
+    function onTemplateChange(){
+      const id = $sel.value;
+      currentTpl = templatesIndex.find(x => x.id === id);
+      buildForm(currentTpl);
+      $preview.innerHTML = 'Llena el formulario para ver el resultado…';
+      $btnDoc.disabled = true;
+      $btnCopy.disabled = true;
+    }
+
+    function selectByHash(){
+      const hash = decodeURIComponent(location.hash||'').replace('#','');
+      const idx = templatesIndex.findIndex(x => x.id === hash);
+      if (idx >= 0) $sel.selectedIndex = idx;
+      onTemplateChange();
+    }
+
+    fetch('data/templates.json')
+      .then(r => r.json())
+      .then(json => {
+        templatesIndex = json.templates || [];
+        $sel.innerHTML = templatesIndex.map(option).join('');
+        $sel.addEventListener('change', onTemplateChange);
+        selectByHash();
+      });
+  </script>
+</body>
+</html>
