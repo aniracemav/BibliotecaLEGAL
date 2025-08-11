@@ -1,0 +1,120 @@
+{
+  "version": "0.4.0",
+  "templates": [
+    {
+      "id": "MX-PROM-CV-001",
+      "name": "Promesa de Compraventa (MX)",
+      "category": "Inmobiliario",
+      "jurisdiction": "MX",
+      "status": "approved",
+      "path": "static:templates/mx_promesa_cv_001.docx",
+      "variables": [
+        {
+          "key": "vendedor_nombre",
+          "label": "Promitente Vendedor - Nombre completo",
+          "type": "text"
+        },
+        {
+          "key": "diafirma",
+          "label": "Fecha de firma (texto)",
+          "type": "text"
+        }
+      ],
+      "tags": [
+        "Promesa",
+        "ad corpus",
+        "pena 10%"
+      ]
+    },
+    {
+      "id": "MX-NDA-001",
+      "name": "NDA Recíproco (MX)",
+      "category": "Confidencialidad",
+      "jurisdiction": "MX",
+      "status": "approved",
+      "path": "templates/mx_nda_001.mustache",
+      "variables": [
+        {
+          "key": "fecha",
+          "label": "Fecha (AAAA-MM-DD)",
+          "type": "date"
+        },
+        {
+          "key": "proyecto",
+          "label": "Proyecto/Finalidad",
+          "type": "text"
+        },
+        {
+          "key": "parte1_razon_social",
+          "label": "Parte 1 - Razón social",
+          "type": "text"
+        },
+        {
+          "key": "parte1_rfc",
+          "label": "Parte 1 - RFC",
+          "type": "text"
+        },
+        {
+          "key": "parte2_razon_social",
+          "label": "Parte 2 - Razón social",
+          "type": "text"
+        },
+        {
+          "key": "parte2_rfc",
+          "label": "Parte 2 - RFC",
+          "type": "text"
+        },
+        {
+          "key": "plazo_meses",
+          "label": "Plazo (meses)",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "MX-ARR-001",
+      "name": "Arrendamiento de Oficinas (CDMX) – Esqueleto",
+      "category": "Inmobiliario",
+      "jurisdiction": "MX",
+      "status": "draft",
+      "path": "templates/mx_arr_001.mustache",
+      "variables": [
+        {
+          "key": "arrendador",
+          "label": "Arrendador (Razón social)",
+          "type": "text"
+        },
+        {
+          "key": "arrendatario",
+          "label": "Arrendatario (Razón social)",
+          "type": "text"
+        },
+        {
+          "key": "domicilio_inmueble",
+          "label": "Domicilio del Inmueble",
+          "type": "text"
+        },
+        {
+          "key": "plazo_meses",
+          "label": "Plazo (meses)",
+          "type": "number"
+        },
+        {
+          "key": "fecha_inicio",
+          "label": "Fecha de inicio (AAAA-MM-DD)",
+          "type": "date"
+        },
+        {
+          "key": "renta_mensual",
+          "label": "Renta mensual (MXN)",
+          "type": "text"
+        },
+        {
+          "key": "garantia_tipo",
+          "label": "Garantía (depósito/fianza/OS)",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
