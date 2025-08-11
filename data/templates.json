@@ -1,0 +1,54 @@
+{
+  "version": "0.1.0",
+  "templates": [
+    {
+      "id": "MX-NDA-001",
+      "name": "NDA Recíproco (MX)",
+      "category": "Confidencialidad",
+      "jurisdiction": "MX",
+      "status": "approved",
+      "variables": [
+        {
+          "key": "fecha",
+          "label": "Fecha (AAAA-MM-DD)",
+          "type": "date"
+        },
+        {
+          "key": "proyecto",
+          "label": "Proyecto/Finalidad",
+          "type": "text"
+        },
+        {
+          "key": "parte1_razon_social",
+          "label": "Parte 1 - Razón social",
+          "type": "text"
+        },
+        {
+          "key": "parte1_rfc",
+          "label": "Parte 1 - RFC",
+          "type": "text"
+        },
+        {
+          "key": "parte2_razon_social",
+          "label": "Parte 2 - Razón social",
+          "type": "text"
+        },
+        {
+          "key": "parte2_rfc",
+          "label": "Parte 2 - RFC",
+          "type": "text"
+        },
+        {
+          "key": "plazo_meses",
+          "label": "Plazo (meses)",
+          "type": "number"
+        }
+      ],
+      "path": "templates/mx_nda_001.mustache",
+      "tags": [
+        "NDA",
+        "Confidencialidad"
+      ]
+    }
+  ]
+}

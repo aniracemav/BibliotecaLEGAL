@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Generador · Biblioteca AV | LEGAL</title>
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">Biblioteca AV | LEGAL</div>
+      <div class="nav">
+        <a href="index.html">Inicio</a>
+        <img src="assets/pulppo-logo.png" alt="Pulppo" title="Pulppo"/>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Selecciona la plantilla</div>
+      <select id="templateSelect" class="input"></select>
+    </div>
+
+    <div class="card" id="formCard">
+      <div class="section-title">Variables</div>
+      <form id="varForm"></form>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Vista previa</div>
+      <div id="preview" class="note" style="min-height:160px;border:1px dashed var(--border);border-radius:12px;padding:12px">Llena el formulario para ver el resultado…</div>
+      <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <button id="downloadDoc" class="button" disabled>Descargar .doc</button>
+        <button id="downloadPdf" class="button" disabled>Descargar PDF</button>
+        <button id="copyText" class="button secondary" disabled>Copiar texto</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let templatesIndex = [];
+    let currentTpl = null;
+    let currentVars = {};
+
+    const $sel = document.getElementById('templateSelect');
+    const $form = document.getElementById('varForm');
+    const $preview = document.getElementById('preview');
+    const $btnDoc = document.getElementById('downloadDoc');
+    const $btnPdf = document.getElementById('downloadPdf');
+    const $btnCopy = document.getElementById('copyText');
+
+    function option(t){ return `<option value="${t.id}">${t.name} · ${t.jurisdiction}</option>`; }
+
+    function fieldHTML(v){
+      const base = `<label style="display:block;font-size:12px;color:var(--muted);margin:6px 0 4px">${v.label}</label>`;
+      if (v.type === 'textarea') return base + `<textarea id="${v.key}" name="${v.key}" rows="4" class="input" style="width:100%"></textarea>`;
+      if (v.type === 'number') return base + `<input type="number" id="${v.key}" name="${v.key}" class="input" style="width:100%"/>`;
+      if (v.type === 'date') return base + `<input type="date" id="${v.key}" name="${v.key}" class="input" style="width:100%"/>`;
+      return base + `<input type="text" id="${v.key}" name="${v.key}" class="input" style="width:100%"/>`;
+    }
+
+    function buildForm(tpl){
+      $form.innerHTML = (tpl.variables||[]).map(fieldHTML).join('<div style="height:8px"></div>') + `<div style="margin-top:12px"><button class="button" id="renderBtn">Renderizar</button></div>`;
+      $form.addEventListener('submit', onSubmit);
+    }
+
+    function onSubmit(e){
+      e.preventDefault();
+      currentVars = {};
+      (currentTpl.variables || []).forEach(v => {
+        const el = document.getElementById(v.key);
+        currentVars[v.key] = (el && el.value) || '';
+      });
+      renderPreview();
+    }
+
+    function textToHtml(text){
+      const esc = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      return esc.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br/>');
+    }
+
+    function renderPreview(){
+      if (!currentTpl) return;
+      fetch(currentTpl.path)
+        .then(r => r.text())
+        .then(raw => {
+          const filled = Mustache.render(raw, currentVars);
+          $preview.innerHTML = '<p>'+ textToHtml(filled) + '</p>';
+          [$btnDoc,$btnPdf,$btnCopy].forEach(b => b.disabled = false);
+          $btnDoc.onclick = () => downloadDoc(filled, currentTpl.name);
+          $btnPdf.onclick = () => downloadPdf(filled, currentTpl.name);
+          $btnCopy.onclick = () => navigator.clipboard.writeText(filled);
+        });
+    }
+
+    function downloadDoc(text, name){
+      const content = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre>${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre></body></html>`;
+      const blob = new Blob([content], {type:'application/msword'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = (name||'contrato') + '.doc';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    }
+
+    async function downloadPdf(text, name){
+      const {{ jsPDF }} = window.jspdf;
+      const doc = new jsPDF({unit:'pt', format:'letter'});
+      const margin = 56;
+      const maxWidth = 612 - margin*2;
+      const lines = doc.splitTextToSize(text, maxWidth);
+      let y = margin;
+      for (let i=0;i<lines.length;i++){{
+        if (y > 756 - margin){{ doc.addPage(); y = margin; }}
+        doc.text(lines[i], margin, y);
+        y += 16;
+      }}
+      doc.save((name||'contrato') + '.pdf');
+    }
+
+    function onTemplateChange(){
+      const id = $sel.value;
+      currentTpl = templatesIndex.find(x => x.id === id);
+      buildForm(currentTpl);
+      $preview.innerHTML = 'Llena el formulario para ver el resultado…';
+      [$btnDoc,$btnPdf,$btnCopy].forEach(b => b.disabled = true);
+    }
+
+    function selectByHash(){
+      const hash = decodeURIComponent(location.hash||'').replace('#','');
+      const idx = templatesIndex.findIndex(x => x.id === hash);
+      if (idx >= 0) $sel.selectedIndex = idx;
+      onTemplateChange();
+    }
+
+    fetch('data/templates.json')
+      .then(r => r.json())
+      .then(json => {{
+        templatesIndex = json.templates || [];
+        $sel.innerHTML = templatesIndex.map(option).join('');
+        $sel.addEventListener('change', onTemplateChange);
+        selectByHash();
+      }});
+  </script>
+</body>
+</html>
