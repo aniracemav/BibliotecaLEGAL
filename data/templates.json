@@ -1,0 +1,236 @@
+{
+  "version": "0.3.0",
+  "templates": [
+    {
+      "id": "MX-PROM-CV-001",
+      "name": "Promesa de Compraventa (MX)",
+      "category": "Inmobiliario",
+      "jurisdiction": "MX",
+      "status": "approved",
+      "path": "docx:mx_promesa_cv_001",
+      "variables": [
+        {
+          "key": "ciudad",
+          "label": "Ciudad/Jurisdicción",
+          "type": "text"
+        },
+        {
+          "key": "diafirma",
+          "label": "Fecha de firma (texto)",
+          "type": "text"
+        },
+        {
+          "key": "vendedor_nombre",
+          "label": "Promitente Vendedor - Nombre completo",
+          "type": "text"
+        },
+        {
+          "key": "vendedor_estado_civil",
+          "label": "Vendedor - Estado civil",
+          "type": "text"
+        },
+        {
+          "key": "vendedor_identificacion",
+          "label": "Vendedor - Tipo de identificación",
+          "type": "text"
+        },
+        {
+          "key": "vendedor_ident_num",
+          "label": "Vendedor - No. identificación",
+          "type": "text"
+        },
+        {
+          "key": "vendedor_rfc",
+          "label": "Vendedor - RFC",
+          "type": "text"
+        },
+        {
+          "key": "vendedor_domicilio",
+          "label": "Vendedor - Domicilio",
+          "type": "text"
+        },
+        {
+          "key": "comprador_nombre",
+          "label": "Promitente Comprador - Nombre completo",
+          "type": "text"
+        },
+        {
+          "key": "comprador_estado_civil",
+          "label": "Comprador - Estado civil",
+          "type": "text"
+        },
+        {
+          "key": "comprador_identificacion",
+          "label": "Comprador - Tipo de identificación",
+          "type": "text"
+        },
+        {
+          "key": "comprador_ident_num",
+          "label": "Comprador - No. identificación",
+          "type": "text"
+        },
+        {
+          "key": "comprador_rfc",
+          "label": "Comprador - RFC",
+          "type": "text"
+        },
+        {
+          "key": "comprador_domicilio",
+          "label": "Comprador - Domicilio",
+          "type": "text"
+        },
+        {
+          "key": "inmueble_domicilio",
+          "label": "Domicilio del inmueble",
+          "type": "text"
+        },
+        {
+          "key": "precio_total",
+          "label": "Precio total (MXN)",
+          "type": "text"
+        },
+        {
+          "key": "abono1_monto",
+          "label": "Abono 1 - Monto (opcional)",
+          "type": "text"
+        },
+        {
+          "key": "abono1_fecha",
+          "label": "Abono 1 - Fecha (opcional)",
+          "type": "date"
+        },
+        {
+          "key": "abono2_monto",
+          "label": "Abono 2 - Monto (opcional)",
+          "type": "text"
+        },
+        {
+          "key": "abono2_fecha",
+          "label": "Abono 2 - Fecha (opcional)",
+          "type": "date"
+        },
+        {
+          "key": "prenda_total",
+          "label": "Prenda - Monto total (MXN, opcional)",
+          "type": "text"
+        },
+        {
+          "key": "datos_bancarios",
+          "label": "Datos bancarios Vendedor (opcional)",
+          "type": "textarea"
+        },
+        {
+          "key": "dias_plazo",
+          "label": "Plazo para escriturar (días naturales)",
+          "type": "number"
+        },
+        {
+          "key": "notaria",
+          "label": "Notaría (opcional)",
+          "type": "text"
+        },
+        {
+          "key": "escritura_previa",
+          "label": "No. escritura previa (opcional)",
+          "type": "text"
+        }
+      ],
+      "tags": [
+        "Promesa",
+        "Inmueble",
+        "ad corpus",
+        "pena 10%"
+      ]
+    },
+    {
+      "id": "MX-NDA-001",
+      "name": "NDA Recíproco (MX)",
+      "category": "Confidencialidad",
+      "jurisdiction": "MX",
+      "status": "approved",
+      "path": "templates/mx_nda_001.mustache",
+      "variables": [
+        {
+          "key": "fecha",
+          "label": "Fecha (AAAA-MM-DD)",
+          "type": "date"
+        },
+        {
+          "key": "proyecto",
+          "label": "Proyecto/Finalidad",
+          "type": "text"
+        },
+        {
+          "key": "parte1_razon_social",
+          "label": "Parte 1 - Razón social",
+          "type": "text"
+        },
+        {
+          "key": "parte1_rfc",
+          "label": "Parte 1 - RFC",
+          "type": "text"
+        },
+        {
+          "key": "parte2_razon_social",
+          "label": "Parte 2 - Razón social",
+          "type": "text"
+        },
+        {
+          "key": "parte2_rfc",
+          "label": "Parte 2 - RFC",
+          "type": "text"
+        },
+        {
+          "key": "plazo_meses",
+          "label": "Plazo (meses)",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "id": "MX-ARR-001",
+      "name": "Arrendamiento de Oficinas (CDMX) – Esqueleto",
+      "category": "Inmobiliario",
+      "jurisdiction": "MX",
+      "status": "draft",
+      "path": "templates/mx_arr_001.mustache",
+      "variables": [
+        {
+          "key": "arrendador",
+          "label": "Arrendador (Razón social)",
+          "type": "text"
+        },
+        {
+          "key": "arrendatario",
+          "label": "Arrendatario (Razón social)",
+          "type": "text"
+        },
+        {
+          "key": "domicilio_inmueble",
+          "label": "Domicilio del Inmueble",
+          "type": "text"
+        },
+        {
+          "key": "plazo_meses",
+          "label": "Plazo (meses)",
+          "type": "number"
+        },
+        {
+          "key": "fecha_inicio",
+          "label": "Fecha de inicio (AAAA-MM-DD)",
+          "type": "date"
+        },
+        {
+          "key": "renta_mensual",
+          "label": "Renta mensual (MXN)",
+          "type": "text"
+        },
+        {
+          "key": "garantia_tipo",
+          "label": "Garantía (depósito/fianza/OS)",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
