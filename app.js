@@ -81,14 +81,15 @@ function openModal(pdfPath){
   const modal = document.getElementById('email-modal');
   document.getElementById('requested-pdf').value = pdfPath;
   modal.setAttribute('aria-hidden','false');
+
+  // Si hay correo guardado, solo lo prellena; NO bypass
   const saved = localStorage.getItem('pulppo_email');
-  if(saved){
-    // if already saved, bypass and download immediately
-    triggerDownload(pdfPath);
-    closeModal();
-  } else {
-    setTimeout(()=> document.getElementById('email').focus(), 50);
+  if (saved) {
+    document.getElementById('email').value = saved;
   }
+
+  setTimeout(()=> document.getElementById('email').focus(), 50);
+}
 }
 
 function closeModal(){
