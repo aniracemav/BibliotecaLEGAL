@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formatos Legales | Pulppo</title>
+  <meta name="description" content="Formatos legales inmobiliarios listos para descargar. Genera leads para asesoría jurídica con Pulppo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="https://pulppo.com" target="_blank" rel="noopener">
+        <img src="assets/pulppo-logo.png" alt="Pulppo" />
+        <span>Pulppo · Formatos Legales</span>
+      </a>
+      <nav class="nav-actions">
+        <a class="btn btn-outline" href="https://calendar.app.google/4tbrkpz84oWbixwWA" target="_blank" rel="noopener">Agendar asesoría</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>FORMATOS LEGALES para la industria inmobiliaria.</h1>
+        <p>Documentos creados por expertos para agilizar tus operaciones. Úsalos hoy mismo.</p>
+      </div>
+    </section>
+
+    <section class="carousel-section">
+      <div class="container">
+        <h2>Biblioteca de formatos</h2>
+        <div id="slider" class="slider">
+          <button class="nav prev" aria-label="Anterior">&#10094;</button>
+          <div class="track" id="slider-track"></div>
+          <button class="nav next" aria-label="Siguiente">&#10095;</button>
+        </div>
+        <div class="dots" id="slider-dots"></div>
+      </div>
+    </section>
+
+    <section class="cta-advisory">
+      <div class="container grid">
+        <div>
+          <h3>¿Necesitas personalizar un contrato?</h3>
+          <p class="seller">Realizamos un analisis juridico de tu operación y realizamos tu documento.</p>
+          <p><strong>Contáctanos:</strong> <a href="mailto:legal@pulppo.com">legal@pulppo.com</a></p>
+          <a class="btn btn-primary" href="https://calendar.app.google/4tbrkpz84oWbixwWA" target="_blank" rel="noopener">Agendar asesoría jurídica</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about">
+      <div class="container about-inner">
+        <img src="assets/pulppo-logo.png" alt="Logo Pulppo" />
+        <div>
+          <h3>Sobre Pulppo</h3>
+          <p>Pulppo es una aceleradora de inmobiliarias que potenciará tu negocio a otro nivel. Para conocer más visita: <a class="link" href="https://pulppo.com" target="_blank" rel="noopener">pulppo.com</a></p>
+          <p>Este micrositio comparte formatos clave para acelerar tus cierres.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="https://pulppo.com" target="_blank" rel="noopener">
+        <img src="assets/pulppo-logo.png" alt="Pulppo" />
+        <span>Pulppo</span>
+      </a>
+      <div class="legal">© <span id="year"></span> Pulppo. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="email-modal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+      <h3 id="modal-title">Descargar formato</h3>
+      <p>Ingresa tu correo para habilitar la descarga.</p>
+      <form id="email-form" novalidate>
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" placeholder="tu@correo.com" required />
+        <input type="hidden" id="requested-pdf" />
+        <button type="submit" class="btn btn-primary">Habilitar descarga</button>
+        <small class="help">No enviamos spam. Guardamos tu correo localmente para no pedirlo otra vez.</small>
+      </form>
+    </div>
+  </div>
+
+  <script>window.DOCS = [{"title": "Terminación anticipada de Contrato de Arrendamiento", "pdf": "assets/pdfs/terminacion-anticipada-arrendamiento.pdf", "preview": "assets/previews/terminacion-anticipada-arrendamiento.png"}, {"title": "Contrato de Arrendamiento Habitacional", "pdf": "assets/pdfs/contrato-arrendamiento.pdf", "preview": "assets/previews/contrato-arrendamiento.png"}, {"title": "Contrato Promesa de Compraventa", "pdf": "assets/pdfs/promesa-compraventa.pdf", "preview": "assets/previews/promesa-compraventa.png"}, {"title": "Requerimiento de Pena Convencional", "pdf": "assets/pdfs/requerimiento-pena-convencional.pdf", "preview": "assets/previews/requerimiento-pena-convencional.png"}, {"title": "Pagaré (Formato)", "pdf": "assets/pdfs/pagare.pdf", "preview": "assets/previews/pagare.png"}, {"title": "Carta de Intención y Apartado de Compraventa", "pdf": "assets/pdfs/carta-intencion-apartado.pdf", "preview": "assets/previews/carta-intencion-apartado.png"}, {"title": "Carta de Intención ENG/ESP", "pdf": "assets/pdfs/carta-intencion-eng-esp.pdf", "preview": "assets/previews/carta-intencion-eng-esp.png"}, {"title": "Convenio de Confidencialidad (Mutuo)", "pdf": "assets/pdfs/convenio-confidencialidad.pdf", "preview": "assets/previews/convenio-confidencialidad.png"}];</script>
+  <script>window.GS_ENDPOINT='https://script.google.com/macros/s/AKfycbzhLb2e7-WZN5lyGDmglWX0Qd_AD4ZIoHL6qytShtMDXDWcbXmOYD8GHbMIBcXwzLne/exec';</script>
+  <script src="app.js?v=final3"></script>
+</body>
+</html>
