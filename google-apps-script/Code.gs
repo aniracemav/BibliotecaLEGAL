@@ -2,8 +2,8 @@
 // Reemplaza SPREADSHEET_ID con el ID de tu Sheet.
 // Asegúrate de tener las columnas: timestamp, email, pdf, userAgent (fila 1).
 
-const SPREADSHEET_ID = 'REEMPLAZA_CON_TU_SHEET_ID';
-const SHEET_NAME = 'Hoja 1'; // o el nombre de tu pestaña
+const SPREADSHEET_ID = '1-gnrH676vkfVZ4JS8nzaA76eVja_0LyZIRHgJmVpgiw8'
+const SHEET_NAME = 'Hoja 1'; 
 
 function doOptions(e) {
   return ContentService.createTextOutput('')
