@@ -1,7 +1,7 @@
 
 // === Google Sheets endpoint (Apps Script Web App) ===
 // REEMPLAZA esta URL tras desplegar tu Apps Script como Web App (ver google-sheets-setup.md)
-const GS_ENDPOINT = window.GS_ENDPOINT || 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+const GS_ENDPOINT = 'https://script.google.com/macros/s/XXXXXXXXXX/exec';
 
 // Data bootstrap
 async function loadDocs(){
