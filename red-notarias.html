@@ -1,0 +1,132 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RED NOTARÍAS | PULPPO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --brand:#D14E3E; --ink:#1F2937; --muted:#6B7280; --bg:#FAFAFA; --card:#FFFFFF; }
+  *{ box-sizing:border-box; }
+  body{ font-family: 'Montserrat', sans-serif; margin:0; background:var(--bg); color:var(--ink); }
+  header{ padding:16px 0; background:#fff; border-bottom:1px solid #eee; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 16px; display:flex; justify-content:space-between; align-items:center; }
+  .title{ font-weight:700; letter-spacing:.3px; display:flex; align-items:center; gap:10px;}
+  .container{ max-width:1100px; margin:24px auto; padding:0 16px; }
+  .grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
+  .card{ background:var(--card); border:1px solid #eee; border-radius:16px; padding:18px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .logo{ width:72px; height:72px; object-fit:contain; border-radius:12px; background:#fff; border:1px solid #eee; }
+  .tag{ display:inline-block; padding:4px 10px; border-radius:999px; background: #FFF1EF; color: var(--brand); font-size:12px; font-weight:600; margin-bottom:8px; }
+  .name{ font-weight:700; font-size:18px; margin:6px 0 2px; }
+  .desc, .meta{ color:var(--muted); font-size:14px; line-height:1.4; }
+  .list { margin:8px 0; padding-left:18px; }
+  .chip{display:inline-block;padding:4px 8px;border:1px solid #eee;border-radius:999px;font-size:12px;margin:4px 6px 0 0;background:#fff;}
+</style>
+<script src="assets/js/pulppo_events.js" defer></script>
+</head>
+<body data-track-visit="true">
+<header>
+  <div class="wrap">
+    <div class="title">
+      <img src="assets/images/pulppo-logo.svg" alt="Pulppo" width="24" height="24">
+      <div>RED NOTARÍAS | PULPPO</div>
+    </div>
+    <a href="./index.html" style="text-decoration:none;color:#1F2937;font-weight:600;">Volver</a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="grid">
+
+    <!-- Notaría 82 (reintegrada) -->
+    <div class="card">
+      <span class="tag">CDMX</span>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="logo" style="display:flex;align-items:center;justify-content:center;font-weight:700;">82</div>
+        <div>
+          <div class="name">Notaría 82 de la Ciudad de México</div>
+          <div class="desc">Datos validados por Pulppo (completar logotipo y contacto si aplica).</div>
+        </div>
+      </div>
+      <div class="meta">Dirección y contacto por confirmar.</div>
+    </div>
+
+    <!-- HLOM -->
+    <div class="card">
+      <span class="tag">CDMX</span>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <img class="logo" src="assets/images/red_notarias/hlom.png" alt="Notarías HLOM">
+        <div>
+          <div class="name">NOTARÍAS HLOM DE LA CDMX</div>
+          <div class="desc">Consorcio integrado por cuatro notarías.</div>
+        </div>
+      </div>
+      <ul class="list desc" style="margin-top:10px;">
+        <li>212 Francis I. Hugues Vélez</li>
+        <li>223 Rosamaría López Lugo</li>
+        <li>246 Guillermo Oliver Bucio</li>
+        <li>126 Adrián Moreno Rivera</li>
+      </ul>
+      <div class="meta">Goldsmith 116, Col. Polanco III Sección, Miguel Hidalgo, 11540, CDMX.</div>
+      <div class="desc" style="margin-top:8px;">
+        <strong>Contactos PULPPO</strong><br>
+        <span class="chip">👤 Daniela Guzmán García · Abogada Senior</span>
+        <a class="chip" href="mailto:dguzman@notariashlom.mx">dguzman@notariashlom.mx</a>
+        <span class="chip">📞 55 5281 4126 Ext. 413</span>
+        <span class="chip">📱 55 7812 1870</span><br>
+        <span class="chip">👤 Luis Miguel Sánchez Ayala · Abogado Senior</span>
+        <a class="chip" href="mailto:lsanchez@notariashlom.mx">lsanchez@notariashlom.mx</a>
+        <span class="chip">📞 55 5281 4126 Ext. 413</span>
+        <span class="chip">📱 55 6295 7126</span>
+      </div>
+    </div>
+
+    <!-- Notaría 5 y 176 -->
+    <div class="card">
+      <span class="tag">CDMX</span>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <img class="logo" src="assets/images/red_notarias/notaria176.png" alt="Notaría 5 y 176">
+        <div>
+          <div class="name">Notaría 5 y 176 de la Ciudad de México</div>
+          <div class="desc">Red colaboradora. (logo 176 integrado)</div>
+        </div>
+      </div>
+      <div class="meta">Motolina 6, Col. Centro Histórico, Cuauhtémoc, 06000, CDMX.</div>
+      <div class="desc" style="margin-top:8px;">
+        <strong>Contacto PULPPO</strong><br>
+        <span class="chip">👤 Carlos Gabriel Cervantes Origel · Notario Público 176</span>
+        <span class="chip">📞 5521-2424 (10 líneas) Ext. 138</span>
+      </div>
+    </div>
+
+    <!-- Notaría 159 EdoMex -->
+    <div class="card">
+      <span class="tag">Estado de México</span>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <img class="logo" src="assets/images/red_notarias/notaria159.png" alt="Notaría 159">
+        <div>
+          <div class="name">Notaría 159 del Estado de México</div>
+          <div class="desc">Aliado en Huixquilucan.</div>
+        </div>
+      </div>
+      <div class="meta">Av. Jesús del Monte 32, Piso 6, Col. Ex Hacienda del Monte, Huixquilucan, 52764, EdoMex.</div>
+      <div class="desc" style="margin-top:8px;">
+        <strong>Contacto PULPPO</strong><br>
+        <span class="chip">👤 Luis Fernando Mafra Pérez · Abogado Titular</span>
+        <a class="chip" href="mailto:lmafra@notaria159.con.mx">lmafra@notaria159.con.mx</a>
+        <span class="chip">📱 55 19 10 45 44</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer style="text-align:center;color:#9CA3AF;font-size:12px;padding:24px;">
+  © <span id="y"></span> Pulppo Legal. Todos los derechos reservados.
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
