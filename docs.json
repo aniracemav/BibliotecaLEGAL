@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Terminación anticipada de Contrato de Arrendamiento",
+    "pdf": "assets/pdfs/terminacion-anticipada-arrendamiento.pdf",
+    "preview": "assets/previews/terminacion-anticipada-arrendamiento.png"
+  },
+  {
+    "title": "Contrato de Arrendamiento Habitacional",
+    "pdf": "assets/pdfs/contrato-arrendamiento.pdf",
+    "preview": "assets/previews/contrato-arrendamiento.png"
+  },
+  {
+    "title": "Contrato Promesa de Compraventa",
+    "pdf": "assets/pdfs/promesa-compraventa.pdf",
+    "preview": "assets/previews/promesa-compraventa.png"
+  },
+  {
+    "title": "Requerimiento de Pena Convencional",
+    "pdf": "assets/pdfs/requerimiento-pena-convencional.pdf",
+    "preview": "assets/previews/requerimiento-pena-convencional.png"
+  },
+  {
+    "title": "Pagaré (Formato)",
+    "pdf": "assets/pdfs/pagare.pdf",
+    "preview": "assets/previews/pagare.png"
+  },
+  {
+    "title": "Carta de Intención y Apartado de Compraventa",
+    "pdf": "assets/pdfs/carta-intencion-apartado.pdf",
+    "preview": "assets/previews/carta-intencion-apartado.png"
+  },
+  {
+    "title": "Carta de Intención ENG/ESP",
+    "pdf": "assets/pdfs/carta-intencion-eng-esp.pdf",
+    "preview": "assets/previews/carta-intencion-eng-esp.png"
+  },
+  {
+    "title": "Convenio de Confidencialidad (Mutuo)",
+    "pdf": "assets/pdfs/convenio-confidencialidad.pdf",
+    "preview": "assets/previews/convenio-confidencialidad.png"
+  }
+]
