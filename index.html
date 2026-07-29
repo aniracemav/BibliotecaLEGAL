@@ -146,6 +146,20 @@
   <script>
     window.GS_ENDPOINT='https://script.google.com/macros/s/AKfycbxOfAi1NonAlnjNLC7NGV6GGobtQ0-7xUdtzs7QbeJQyFcyk56pFyTv6Ftvrkr_c0xf/exec';
   </script>
+  <script>
+    (function(){
+      try{
+        if(window.GS_ENDPOINT && window.GS_ENDPOINT.indexOf('http') === 0){
+          fetch(window.GS_ENDPOINT, {
+            method:'POST',
+            headers:{'Content-Type':'text/plain'},
+            body: JSON.stringify({type:'visit', ts:new Date().toISOString(), referrer: document.referrer || '', ua:navigator.userAgent}),
+            mode:'cors', cache:'no-cache'
+          });
+        }
+      }catch(e){}
+    })();
+  </script>
   <script src="app.js?v=ds1"></script>
 </body>
 </html>
