@@ -118,6 +118,25 @@ a:hover{color:var(--text-primary); opacity:.7}
 .hero .accent-line{width:56px;height:var(--line-accent);background:var(--divider-accent);border:0;margin:18px 0}
 .hero p{max-width:640px; color:var(--text-secondary)}
 
+/* ---- Hero Photo (layout E oficial del design system) ---- */
+.hero-photo{position:relative; padding:0; min-height:520px; display:flex; align-items:center; overflow:hidden}
+.hero-photo__bg{position:absolute; inset:0; background-size:cover; background-position:center; z-index:0}
+.hero-photo__overlay{position:absolute; inset:0; background:var(--overlay-dark-70); z-index:0}
+.hero-photo__content{position:relative; z-index:1; padding:72px var(--space-edge)}
+.hero-photo .eyebrow{color:var(--text-on-dark)}
+.hero-photo h1{color:var(--text-on-dark)}
+.hero-photo p{color:var(--color-gray)}
+@media(max-width:640px){.hero-photo{min-height:420px}.hero-photo__content{padding:48px var(--space-edge)}}
+
+/* ================= TEAM ================= */
+.team{padding:40px 0; background:var(--surface-card)}
+.team h2{max-width:640px; margin-bottom:24px}
+.team-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:var(--space-card-gap); max-width:640px}
+.team-card{background:var(--surface-default); border:1px solid var(--divider-neutral); overflow:hidden}
+.team-card img{width:100%; aspect-ratio:3/4; object-fit:cover; display:block}
+.team-card h3{padding:16px 16px 2px; margin:0}
+.team-card .body-list{padding:0 16px 16px; color:var(--text-secondary); margin:0}
+
 /* ================= LIBRARY — Card Grid (layout F) ================= */
 .carousel-section{padding:8px 0 48px}
 .carousel-section h2{margin-bottom:20px}
