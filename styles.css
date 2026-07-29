@@ -135,7 +135,8 @@ a:hover{color:var(--text-primary); opacity:.7}
 
 /* ================= TEAM ================= */
 .team{padding:40px 0; background:var(--surface-card)}
-.team h2{max-width:640px; margin-bottom:24px}
+.team h2{margin-bottom:24px; white-space:nowrap; font-size:clamp(18px, 2.6vw, var(--size-28))}
+@media(max-width:640px){.team h2{white-space:normal}}
 .team-grid{display:flex; flex-wrap:wrap; gap:28px; max-width:640px}
 .team-card{display:flex; align-items:center; gap:12px}
 .team-card img{width:48px; height:48px; border-radius:50%; object-fit:cover; display:block; flex-shrink:0}
