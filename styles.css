@@ -108,7 +108,7 @@ a:hover{color:var(--text-primary); opacity:.7}
 /* ================= HEADER ================= */
 .site-header{background:var(--surface-default); border-bottom:var(--line-divider) solid var(--divider-neutral)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px var(--space-edge);max-width:1120px;margin:0 auto}
-.brand img{display:block; height:26px; width:auto}
+.brand img{display:block; height:38px; width:auto}
 .nav-actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
 
 /* ================= HERO ================= */
